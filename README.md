@@ -18,29 +18,6 @@ Key-value хранилище строк, списков, словарей
 Нагрузочные тесты
 ```
 
-Внешний интерфейс - Cache, поддерживающий следующие методы:
-```
-Set(key string, value interface{}, expire time.Duration) (*Value, error)
-Get(key string) (*Value, error)
-Remove(key string) (err error)
-Keys() ([]string, error)
-GetAtIndex(key string, index interface{}) (interface{}, error)
-```
-Для создания кэша необходимо вызвать метод NewCache,
-принимающий параметры:
-```
-defaultTTL   time.Duration      - TTL, выставляемый ключу по умолчанию
-out          io.Writer          - output для лога
-rw           io.ReadWriter      - файл для восстановления кэша и
-                                  записи в него
-saveFreq     time.Duration      - частота записи в файл
-nShards      int                - максимальное число шардов, в которые
-                                  можно одновременно писать, по умолчанию 1
-shardingFunc func(string)uint32 - хэш-функция, позволяющая определить в
-                                  каком шарде должен храниться ключ.
-                                  По умолчанию используется
-                                  Sum от 32-bit FNV-1a
-```
 ## REST HTTP приложение
 Для запуска HTTP сервера нужно выполнить метод Run класса App.
 Перед запуском сервера нужно проинициализировать инстанс App методом
